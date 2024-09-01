@@ -27,8 +27,13 @@ io.on("connection", function (socket) {
 })
 
 app.get('/', function (req, res) {
-    res.render("index");
-})
+    try {
+        res.render("index");
+    } catch (err) {
+        console.error("Error rendering index:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 
 server.listen(3000, () => {
